@@ -41,7 +41,22 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['lname'] = $row['lname'];
         $_SESSION['positn'] = $row['position'];
-        header("Location: index.php");
+
+        switch ($row['position']) {
+            case 'Collector':
+                header("Location: admin_dashboard.php");
+                break;
+            case 'Director':
+                header("Location: manager_dashboard.php");
+                break;
+            case 'President':
+                header("Location: employee_dashboard.php");
+                break;
+            default:
+                // Handle other positions or redirect to a generic page
+                header("Location: index.php");
+                break;
+        }
     } else {
             $errorMessage = "Invalid Login.";
         }
