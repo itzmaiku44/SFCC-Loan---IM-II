@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('loanphoto.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+header .headTitle {
+    color: white;
+    font-size: 2em;
+    user-select: none;
+}
+
+header nav {
+    display: flex;
+    gap: 30px;
+}
+
+header nav a {
+    position: relative;
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    padding-top: 20px;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 6px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .4s;
+}
+
+header nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.sec1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* semi-transparent background to darken the background image */
+}
+
+.container {
+    position: relative;
+    background: linear-gradient(to right, #d3cfcf, #a0afde);
+    width: 650px;
+    height: 520px;
+    padding: 5.1rem 5.1rem 11.5rem 10rem;
+    margin: 50px auto;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.7);
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+    transition: 2s;
+}
+
+
+.container {
+    position: relative;
+    background: linear-gradient(to right, #d3cfcf, #a0afde);
+    width: 650px;
+    height: 520px;
+    padding: 5.1rem 5.1rem 11.5rem 10rem;
+    margin: 50px auto;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.7);
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+    transition: 2s;
+}
+
+form {
+    margin: 0 2rem;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 0.4rem;
+    color: white;
+}
+
+.subtitle {
+    font-size: 1rem;
+    text-align: center;
+    color: #d9d9d9;
+    margin-top: -1.7rem;
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    padding: 1% 0;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    color: black;
+}
+
+input {
+    color: #ebebeb;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    padding-left: 1.5rem;
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+
+input:focus {
+    background-color: transparent;
+    outline: transparent;
+    border-bottom: 2px solid hsl(0, 0%, 58%);
+}
+
+input::placeholder {
+    color: transparent;
+}
+
+label {
+    color: #cccccc;
+    position: relative;
+    left: 1.2em;
+    top: -1.7em;
+    cursor: auto;
+    transition: 0.3s ease all;
+    pointer-events: none;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+    top: -3.8em;
+    color: #A7A7A7;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.recover {
+    text-align: right;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+    margin-top: -0.4rem;
+    font-weight: bold;
+}
+
+.recover a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+.recover a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.btn {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    color: white;
+    cursor: pointer;
+    transition: 0.9s;
+    box-shadow: 0 2px 3px rgba(0, 0, 1, 0.9);
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 65%);
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 4rem;
+    margin-top: 0.9rem;
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+}
+
+button {
+    color: darkblue;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: -1.5em;
+    transition-timing-function: ease;
+}
+
+button:hover {
+    text-decoration: underline;
+    color: blue;
+}
