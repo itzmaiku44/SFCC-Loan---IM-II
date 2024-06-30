@@ -3,7 +3,7 @@
 $dbhost = 'localhost'; 
 $dbuser = 'root';      
 $dbpass = '';          
-$dbname = 'loandb';    
+$dbname = 'loan_db';    
 
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
