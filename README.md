@@ -1,4 +1,4 @@
-## Information Management II   
+## Information Management II   CIS2204
 
 ## *Website:* **SFCC LOANS**                          
 ### *members:*                            
