@@ -34,18 +34,19 @@ $email = $_SESSION['email']; */
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&family=Kumbh+Sans:wght@100..900&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
 
 
 </head>
 
 <body>
   <header>
-    <h2 class="headTitle">SFCC LOANS <span class="subTitle" style="">Your trusted partner</span></h2>
+    <h2 class="headTitle"><img src="img/SFCC.png" alt="SFCC" style="">SFCC LOANS <span class="subTitle" style="">Your trusted partner</span></h2>
     <nav>
-      <a class="home" href="#home">Home</a>
-      <a class="about" href="#about">About Us</a>
-      <a class="loanoffer" href="#loanOffer">Loan Offer</a>
-      <a class="contact" href="#footerContact">Contact Us</a>
+      <a class="home" href="#home"><i class="lni lni-home"></i> Home</a>
+      <a class="about" href="#about"><i class="lni lni-magnifier"></i> About Us</a>
+      <a class="loanoffer" href="#loanOffer"><i class="lni lni-handshake"></i> Loan Offer</a>
+      <a class="contact" href="#footerContact"><i class="lni lni-phone"></i> Contact Us</a>
       <button class="loginuser" href="login.php">LOGIN</button>
       
     </nav>
@@ -67,7 +68,7 @@ $email = $_SESSION['email']; */
       <div class="loanslider">
         <div class="item active" style="background-image: url('img/loanman1.jpg');">
           <div class="content">
-           <p>SFCC LOAN</p>
+           <p>SFCC LOANS</p>
             <h2>How To Apply </h2>
             <p>Simple and Secure Loan Application Process</p>
             <a href="login.php"><button class="order">Apply Now</button></a>
@@ -75,7 +76,7 @@ $email = $_SESSION['email']; */
         </div>
         <div class="item" style="background-image: url('img/loanpic3.webp');">
           <div class="content">
-            <p>Loaning App</p>
+            <p>SFCC LOANS</p>
             <h2>LOAN APPLICATION</h2>
             <p>Simple and Secure Loan Application Process</p>
             <a href="login.php"><button class="order">Apply Now</button></a>
@@ -132,7 +133,7 @@ $email = $_SESSION['email']; */
   <section id="loan" class="registration-section">
         <div class="icon-container">
             <img src="img/regicon.png" alt="Icon 4">
-            <p>Register an account through our mobile app</p>
+            <p>Register an account through our website</p>
         </div>
         <div class="icon-container" >
             <img src="img/docicon.png" alt="Icon 5">

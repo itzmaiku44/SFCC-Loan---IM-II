@@ -157,7 +157,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        <img src="Loan/imgage/sme_loanmodal.png" alt="SME Loan">
+                        <img src="Loan/image/sme_loanmodal.png" alt="SME Loan">
                         Carry on with your plans, get funds for your business needs.
                         </div>
                         <div class="modal-footer">
