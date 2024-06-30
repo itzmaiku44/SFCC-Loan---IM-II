@@ -305,25 +305,6 @@ header nav .contact:hover::after {
   animation-duration: 1.3s;
 }
 
-.cart-icon {
-  position: absolute;
-  top: -140%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-}
-
-.cart-icon ion-icon {
-  font-size: 3rem;
-  color: #d8d5c8;
-}
-
-.cart-icon ion-icon:hover {
-  color: #e7a200;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
 @media screen and (max-width: 100%) {
   .thumbnail {
     justify-content: start;
