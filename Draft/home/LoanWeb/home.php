@@ -41,13 +41,13 @@ $email = $_SESSION['email']; */
 
 <body>
   <header>
-    <h2 class="headTitle"><img src="img/SFCC.png" alt="SFCC" style="">SFCC LOANS <span class="subTitle" style="">Your trusted partner</span></h2>
+    <h2 class="headTitle"><img src="img/SFCC.png" alt="" style="">SFCC LOANS <span class="subTitle" style="">Your trusted partner</span></h2>
     <nav>
       <a class="home" href="#home"><i class="lni lni-home"></i> Home</a>
       <a class="about" href="#about"><i class="lni lni-magnifier"></i> About Us</a>
       <a class="loanoffer" href="#loanOffer"><i class="lni lni-handshake"></i> Loan Offer</a>
       <a class="contact" href="#footerContact"><i class="lni lni-phone"></i> Contact Us</a>
-      <button class="loginuser" href="login.php">LOGIN</button>
+      <button class="loginuser"><a class="lgn" href="login.php">LOGIN</a></button>
       
     </nav>
   </header>
@@ -69,16 +69,16 @@ $email = $_SESSION['email']; */
         <div class="item active" style="background-image: url('img/loanman1.jpg');">
           <div class="content">
            <p>SFCC LOANS</p>
-            <h2>How To Apply </h2>
-            <p>Simple and Secure Loan Application Process</p>
+            <h2><b>How To Apply </b></h2>
+            <p style="font-weight: 400;">Simple and Secure Loan Application Process</p>
             <a href="login.php"><button class="order">Apply Now</button></a>
           </div>
         </div>
         <div class="item" style="background-image: url('img/loanpic3.webp');">
           <div class="content">
             <p>SFCC LOANS</p>
-            <h2>LOAN APPLICATION</h2>
-            <p>Simple and Secure Loan Application Process</p>
+            <h2><b>LOAN APPLICATION</b></h2>
+            <p style="font-weight: 400;">Simple and Secure Loan Application Process</p>
             <a href="login.php"><button class="order">Apply Now</button></a>
           </div>
         </div>
@@ -116,13 +116,15 @@ $email = $_SESSION['email']; */
    <!--  C A S H  N O W   T A B -->
   <section id="about" class="cashnow">
     <div class="cashnow-apply">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      
+      <p><b>Welcome to SFCC LOANS</b>, your trusted partner in financial solutions. At SFCC LOANS, we understand that each financial journey is unique, which is why we are committed to providing personalized lending options tailored to meet your specific needs. Whether you're looking to finance a new home, consolidate debt, or fund a personal project, our dedicated team of professionals is here to guide you every step of the way. With a focus on transparency, integrity, and customer satisfaction, we strive to make your borrowing experience straightforward and rewarding. Discover how SFCC LOANS can help you achieve your financial goals today.
+
+<br><br>Feel free to customize the business name and details according to your specific Loan business!</p>
+      <img src="img/banking.jpg" style="height: 500px;width: 1000px;"/>
     </div>
   </section>
-
+  <div id="loanOffer" class="loanoffer-anchor"></div>
          <!--  LOAN OFFER TAB  -->
-  <section id="loanOffer">
+  <section>
     <?php
       include("loan_offer.php");
     ?>
