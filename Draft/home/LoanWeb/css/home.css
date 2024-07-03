@@ -127,6 +127,16 @@ header nav .loginuser:hover {
 
 }
 
+header .lgn {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+header .lgn:hover {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
 header nav .home::after {
   content: '';
   position: absolute;
@@ -216,6 +226,12 @@ header nav .contact:hover::after {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 20px;
 
+}
+
+.loanoffer-anchor {
+  
+  position: absolute;
+  top: 184%;
 }
 
 .slider {
@@ -389,6 +405,7 @@ header nav .contact:hover::after {
   color: #2d73ff;
   font-size: 1em;
   line-height: 1.5;
+  font-weight: 600;
 }
 
 .order {
@@ -428,7 +445,7 @@ header nav .contact:hover::after {
 
 /* Cashnow Section */
 .cashnow {
-  text-align: center;
+  text-align: justify;
   background-color: transparent;
   color: rgb(0, 0, 0);
   padding: 20vh;
@@ -437,8 +454,26 @@ header nav .contact:hover::after {
 }
 
 .cashnow-apply {
-  text-align: center;
-  margin-right: 100vh;
+  text-align: justify;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.cashnow-apply p {
+  margin-top: 40px;
+  padding-right: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #3b72b1;
+}
+
+.cashnow-apply img  {
+  box-shadow: 0 2px 8px rgba(0, 0, 1, 0.6);
+  border-radius: 10px;
+  position: relative;
+  /* left: 130%; */
 }
 
 
