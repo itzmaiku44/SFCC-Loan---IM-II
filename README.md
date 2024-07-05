@@ -4,7 +4,7 @@
 ### *members:*                            
 - Michael James Catubig   
 - Jonathan Paulo Seares                                                                         
-- Adrian Cimafranc  
+- Adrian Cimafranca  
 - German Felisarta
 
 
