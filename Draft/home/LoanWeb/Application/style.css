@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: rgba(232, 232, 232, 1);
+}
+
+
+/* -------------------------------------------        CONTAINER        */
+.container {
+    display: flex;
+    transition: opacity 0.5s, display 0.5s;
+    position: absolute;
+    width: 93%;
+    height: 85%;
+    padding: 30px 120px 50px 120px;
+    background: rgba(232, 232, 232, 1);
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+}
+
+.form-title {
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.form-group {
+    width: 60%;
+    margin-bottom: 15px;
+    z-index: 99;
+    gap: 10px;
+    flex: 50%;
+
+}
+
+.form-group-date {
+    width: 70%;
+    display: inline;
+    flex-direction: row;
+    z-index: 99;
+    gap: 10px;
+    flex: 50%;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.form-group-date input {
+    width: 10%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin: 3px;
+}
+
+#purpose {
+    width: 24%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin: 3px;
+}
+
+label {
+    width: 50%;
+    display: block;
+    margin-bottom: 5px;
+    pointer-events: none;
+    font-size: 1.1em;
+}
+
+input[type="text"],
+input[type="email"] {
+
+    width: 26%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin: 3px;
+}
+
+.countrylist {
+    width: 26%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin: 3px;
+}
+
+select {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin: 3px;
+}
+
+select:required:invalid {
+    color: gray;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+option {
+    color: black;
+}
+
+.form-amount {
+    width: 48%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    flex: 30%;
+}
+
+.form-amount input {
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 17px;
+    margin: 3px;
+}
+
+.form-option {
+    flex: 2;
+    width: 30%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.terms {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.9rem;
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.terms button {
+    color: darkblue;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 0.5em;
+    transition-timing-function: ease;
+    cursor: pointer;
+}
+
+/* ----------------------------------------        SUBMIT BUTTON         */
+button[type="submit"] {
+    position: absolute;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    box-shadow: 0 2px 3px rgba(0, 0, 1, 0.9);
+    position: relative;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    top: 50px;
+    width: 25%;
+    font-size: 1.1rem;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 65%);
+}
+
+
+
+/*---------------------------------------------     Document preview ---*/
+
+.form-option1 {
+    position: relative;
+    display: flex;
+    width: 40%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    flex-direction: column;
+    left: 60%;
+    bottom: 695px;
+
+}
+
+.form-option1 input {
+    margin-bottom: 10px;
+}
+
+form ol {
+    padding-left: 0;
+}
+
+form li,
+div>.files {
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+}
+
+form img {
+    height: 64px;
+    order: 1;
+}
+
+form .files {
+    line-height: 32px;
+    padding-left: 10px;
+}
