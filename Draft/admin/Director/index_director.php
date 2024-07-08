@@ -145,11 +145,11 @@
                                     <td>$row[fundPurpose]</td>
                                     <td>$row[applicationNumber]</td>
                                     <td>$row[applyDate]</td>
-                                    <td id='status-{$row['applicationNumber']}'>$row[statusDr]</td>
+                                    <td>$row[statusDr]</td>
                                     <td>
                                         <div class='d-grid gap-2 d-md-block'>
                                         <a class='btn btn-success btn-sm m-1 fs-5 align-baseline viewBtn' data-bs-toggle='modal' data-bs-target='#viewData' data-id='" . $row['id'] . "'><i class='bi bi-eye'></i></a> 
-                                        <a class='btn btn-primary btn-sm m-1 fs-5 align-baseline approveBtn' data-id='{$row['applicationNumber']}'><i class='bi bi-check2-circle'></i></a> 
+                                        <a class='btn btn-primary btn-sm m-1 fs-5 align-baseline approveBtn' data-id='{$row['applicationNumber']}' ><i class='bi bi-check2-circle'></i></a> 
                                         <a class='btn btn-danger btn-sm m-1 fs-5 align-baseline' ><i class='bi bi-x-circle'></i></a>
                                         </div>
                                     </td>
