@@ -13,7 +13,7 @@
     $start_from = ($current_page - 1) * $rows_per_page;
 
     // Fetch data with pagination
-    $sql = "SELECT * FROM directordb LIMIT $start_from, $rows_per_page";
+    $sql = "SELECT * FROM rejecteds LIMIT $start_from, $rows_per_page";
     $result = $data->query($sql);
 
     if (!$result) {
@@ -21,7 +21,7 @@
     }
 
     // Fetch total number of rows for pagination
-    $sql_total = "SELECT COUNT(*) AS total FROM directordb";
+    $sql_total = "SELECT COUNT(*) AS total FROM rejecteds";
     $result_total = $data->query($sql_total);
     $row_total = $result_total->fetch_assoc();
     $total_pages = ceil($row_total['total'] / $rows_per_page);
@@ -108,7 +108,7 @@
         </aside>
         <div class="main p-3" >
             <div class="container1 table-responsive">
-                <h2 class="titlewrap mb-5 text-center">Application Dashboard</h2>
+                <h2 class="titlewrap mb-5 text-center">REJECTS ARCHIVE</h2>
                 <table class="table table-stripped table-hover mt-3 text-center rounded border-2">
                     <caption class="caption-top">List of Applications</caption>
                     <thead class="table-dark">
@@ -120,8 +120,8 @@
                             <th>Term Length</th>
                             <th>Purpose</th>
                             <th>Date of Application</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -138,12 +138,9 @@
                                     <td>$row[term]</td>
                                     <td>$row[fundPurpose]</td>
                                     <td>$row[applyDate]</td>
-                                    <td>$row[statusDr]</td>
                                     <td>
                                         <div class='d-grid gap-2 d-md-block'>
                                         <a class='btn btn-success btn-sm m-1 fs-5 align-baseline viewBtn' data-bs-toggle='modal' data-bs-target='#viewData' data-id='" . $row['id'] . "'><i class='bi bi-eye'></i></a> 
-                                        <a class='btn btn-primary btn-sm m-1 fs-5 align-baseline approveBtn' data-id='{$row['applicationNumber']}' ><i class='bi bi-check2-circle'></i></a> 
-                                        <a class='btn btn-danger btn-sm m-1 fs-5 align-baseline rejectBtn' data-id='{$row['applicationNumber']}' ><i class='bi bi-x-circle'></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -207,7 +204,7 @@
                             <form action="#" id="myForm" style="display: flex;justify-content: space-between;align-items: flex-start;padding: 0;">
 
                                 <div class="card imgholder" id="imgholder"style="width: 330px;height: 250px;position: relative;border-radius: 20px;overflow: hidden;">
-                                    <img src="../../image/id-card-icon.png" alt="" width="330" height="250" class="showImg">
+                                    <img src="../image/id-card-icon.png" alt="" width="330" height="250" class="showImg">
                                 </div>
 
                                 <div class="inputField" id="inputField" style="flex-basis: 55%;border-left: 5px groove rgb(2, 121, 2);padding-left: 20px;padding-right: 50px;">
@@ -231,7 +228,7 @@
                 </div>
             </div>
             
-            <script src="modalQuery.js"></script>
+            <script src="modalQueryR.js"></script>
             <script src="adminQuery.js"></script>
 
                         

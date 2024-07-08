@@ -18,11 +18,11 @@ if ($conn->connect_error) {
 if(isset($_POST['id'])){
     $id = $_POST['id'];
  
-    $sql1 = "UPDATE application SET directorStatus='Approved' WHERE id=$id";
-    $sql2 = "UPDATE directordb SET statusDr='Approved' WHERE applicationNumber=$id";
+    $sql1 = "UPDATE application SET directorStatus='Rejected' WHERE id=$id";
+    $sql2 = "UPDATE directordb SET statusDr='Rejected' WHERE applicationNumber=$id";
 
     /* if ($conn->query($sql1) === TRUE && $conn->query($sql2) === TRUE) {
-        echo json_encode(["status" => "success", "message" => "Application approved successfully"]);
+        echo json_encode(["status" => "success", "message" => "Application rejected successfully"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Error updating record: " . $conn->error]);
     }
@@ -31,13 +31,13 @@ if(isset($_POST['id'])){
 } */
 
 if ($conn->query($sql1) === TRUE && $conn->query($sql2) === TRUE) {
-    // Move data to Approved table
-    $sql_transfer = "INSERT INTO approveds (SELECT * FROM directordb WHERE applicationNumber=$id)";
+    // Move data to Rejected table
+    $sql_transfer = "INSERT INTO rejecteds (SELECT * FROM directordb WHERE applicationNumber=$id)";
     if ($conn->query($sql_transfer) === TRUE) {
         // Delete data from original table
         $sql_delete = "DELETE FROM directordb WHERE applicationNumber=$id";
         if ($conn->query($sql_delete) === TRUE) {
-            echo json_encode(["status" => "success", "message" => "Application approved and moved successfully"]);
+            echo json_encode(["status" => "success", "message" => "Application rejected and moved successfully"]);
         } else {
             echo json_encode(["status" => "error", "message" => "Error deleting record: " . $conn->error]);
         }
@@ -50,6 +50,10 @@ if ($conn->query($sql1) === TRUE && $conn->query($sql2) === TRUE) {
 } else {
 echo json_encode(["status" => "error", "message" => "Invalid request parameters"]);
 }
+
+
+
+
 
 $conn->close();
 ?>
