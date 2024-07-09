@@ -1,55 +1,91 @@
 <?php
-    session_start();
-    if(!isset($_SESSION["username"])){
-        header("Location: home.php");
-        exit();
-    }
-    include("connect.php");
-?>
+session_start();
+include("connect.php");
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+    $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+    $bmonth = (int)$_POST['bmonth'];
+    $bday = (int)$_POST['bday'];
+    $byear = (int)$_POST['byear'];
+    $phonenum = mysqli_real_escape_string($conn, $_POST['phonenum']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $street1 = mysqli_real_escape_string($conn, $_POST['street1']);
+    $street2 = mysqli_real_escape_string($conn, $_POST['street2']);
+    $city = mysqli_real_escape_string($conn, $_POST['city']);
+    $region = mysqli_real_escape_string($conn, $_POST['region']);
+    $postalcode = (int)$_POST['postalcode'];
+    $country = mysqli_real_escape_string($conn, $_POST['country']);
+    $amount = (int)$_POST['amount'];
+    $lterms = mysqli_real_escape_string($conn, $_POST['lterms']);
+    $purpose = mysqli_real_escape_string($conn, $_POST['purpose']);
+    $age = date('Y') - $byear;
+
+    $sql = "INSERT INTO application (fname, lname, age, bmonth, bday, byear, phonenum, email, street1, street2, city, province, postal, country, loanAmount, term, fundPurpose)
+            VALUES ('$firstName', '$lastName', '$age', '$bmonth', '$bday', '$byear', '$phonenum', '$email', '$street1', '$street2', '$city', '$region', '$postalcode', '$country', '$amount', '$lterms', '$purpose')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply for loam</title>
+    <title>Apply for Loan</title>
+    <link rel="stylesheet" href="../css/home.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
-
 <body>
-    <div class="container" id="container">
-        <h2 class="form-title">Application Form</h2>
-        <form method="post" action="#" enctype="multipart/form-data">
-            <label class="group-label" for="Name">Name:</label>
-            <div class="form-group">
-                <input type="text" id="firstName" name="firstName" placeholder="First" required>
-                <input type="text" id="lastName" name="lastName" placeholder="Last" required>
-            </div>
-            <label for="firstName">Birth Date:</label>
-            <div class="form-group-date">
-                <input type="number" id="bmonth" name="bmonth" placeholder="Month" min="1" max="12" required>
-                <input type="number" id="bday" name="bday" placeholder="Day" min="1" max="31" required>
-                <input type="number" id="byear" name="ybear" placeholder="Year" min="1900" max="2024" required>
-            </div>
-            <label class="group-label" for="firstName" style="margin-top: 15px;">Contact:</label>
-            <div class="form-group">
-                <input type="text" id="phonenum" name="phonenum" placeholder="Phone Number" required>
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
-            </div>
-            <label for="firstName">Address:</label>
-            <div class="form-group">
-                <input type="text" id="street1" name="street1" placeholder="Street Address" required>
-                <input type="text" id="street2" name="street2" placeholder="Street Address Line 2" required>
-                <input type="text" id="city" name="city" placeholder="City" required>
-            </div>
-            <div class="form-group">
-                <input type="text" id="region" name="region" placeholder="Region" required>
-                <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" required>
-                <select id="country" name="country" class="countrylist">
-                    <option value="" disabled selected hidden>Country</option>
+<header>
+    <h2 class="headTitle"><img src="img/SFCC.png" alt="SFCC Logo"> SFCC LOANS <span class="subTitle">Your trusted partner</span></h2>
+    <nav>
+        <a class="home" href="#home"><i class="lni lni-home"></i> Home</a>
+        <a class="about" href="#about"><i class="lni lni-magnifier"></i> About Us</a>
+        <a class="loanoffer" href="#loanOffer"><i class="lni lni-handshake"></i> Loan Offer</a>
+        <a class="contact" href="#footerContact"><i class="lni lni-phone"></i> Contact Us</a>
+        <button class="loginuser"><a class="lgn" href="login.php">LOGIN</a></button>
+    </nav>
+</header>
+<div class="container" id="container">
+    <h2 class="form-title">Application Form</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+        <label class="group-label" for="Name">Name:</label>
+        <div class="form-group">
+            <input type="text" id="firstName" name="firstName" placeholder="First" required>
+            <input type="text" id="lastName" name="lastName" placeholder="Last" required>
+        </div>
+        <label for="birthDate">Birth Date:</label>
+        <div class="form-group-date">
+            <input type="number" id="bmonth" name="bmonth" placeholder="Month" min="1" max="12" required>
+            <input type="number" id="bday" name="bday" placeholder="Day" min="1" max="31" required>
+            <input type="number" id="byear" name="byear" placeholder="Year" min="1900" max="<?php echo date('Y'); ?>" required>
+        </div>
+        <label class="group-label" for="contact">Contact:</label>
+        <div class="form-group">
+            <input type="text" id="phonenum" name="phonenum" placeholder="Phone Number" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+        </div>
+        <label for="address">Address:</label>
+        <div class="form-group">
+            <input type="text" id="street1" name="street1" placeholder="Street Address" required>
+            <input type="text" id="street2" name="street2" placeholder="Street Address Line 2">
+            <input type="text" id="city" name="city" placeholder="City" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="region" name="region" placeholder="Region" required>
+            <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" required>
+            <select id="country" name="country" class="countrylist" required>
+                <option value="" disabled selected hidden>Country</option>
+                
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Åland Islands">Åland Islands</option>
                     <option value="Albania">Albania</option>
@@ -297,43 +333,49 @@
                     <option value="Yemen">Yemen</option>
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
-                </select>
+                
+            </select>
+        </div>
+        <div class="form-amount">
+            <label for="amount">Loan Amount:</label>
+            <input type="number" id="amount" name="amount" min="0" placeholder="Enter Amount" required>
+        </div>
+        <div class="form-option">
+            <label for="lterms">Term Length:</label>
+            <select id="lterms" name="lterms">
+                <option value="24 Months">24 Months - 8.00% Interest rate</option>
+                <option value="36 Months">36 Months - 8.38% Interest rate</option>
+                <option value="48 Months">48 Months - 8.72% Interest rate</option>
+                <option value="60 Months">60 Months - 9.00% Interest rate</option>
+            </select>
+        </div>
+        <label class="group-label" for="purpose">Purpose of fund:</label>
+        <div class="form-group-purpose">
+            <input type="text" id="purpose" name="purpose" required>
+        </div>
+        <div class="terms">
+            <p>By clicking submit, you agree with our <button id="signUpButton">terms and conditions</button>.</p>
+        </div>
+        <button type="submit" name="submit">Submit</button>
+        <div class="form-option1">
+            <label for="image">Upload document file(s)</label>
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png" multiple required>
+            <div class="preview">
+                <p class="files">No files currently selected for upload</p>
             </div>
-
-            <div class="form-amount">
-                <label for="Amount">Loan Amount:</label>
-                <input type="number" id="amount" name="amount" min="0" placeholder="Enter Amount" required>
-            </div>
-            <div class="form-option">
-                <label for="options">Term Length:</label>
-                <select id="lterms" name="lterms">
-                    <option value="24 Months">24 Months - 8.00% Interest rate</option>
-                    <option value="36 Months">36 Months - 8.38% Interest rate</option>
-                    <option value="48 Months">48 Months - 8.72% Interest rate</option>
-                    <option value="60 Months">60 Months - 9.00% Interest rate</option>
-                </select>
-            </div>
-            <label class="group-label" for="Name">Purpose of fund:</label>
-            <div class="form-group-purpose">
-                <input type="text" id="purpose" name="purpose" required>
-            </div>
-            <div class="terms">
-                <p>By clicking submit, you agreed with our </p>
-                <button id="signUpButton"> terms and conditions.</button>
-            </div>
-            <button type="submit" name="submit">Submit</button>
-            <div class="form-option1">
-                <label for="image">Upload document file(s)</label>
-                <input type="file" id="image" name="image" accept="image/jpeg, image/png" multiple required>
-                <div class="preview">
-                    <p class="files">No files currently selected for upload</p>
-                </div>
-            </div>
-
-
-        </form>
-    </div>
-    <script src="script.js"></script>
+        </div>
+    </form>
+</div>
+<script src="script.js"></script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
