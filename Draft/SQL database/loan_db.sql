@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2024 at 06:59 AM
+-- Generation Time: Jul 11, 2024 at 09:32 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -79,16 +79,41 @@ CREATE TABLE `application` (
   `collector` varchar(255) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `application`
+-- Table structure for table `approved`
 --
 
-INSERT INTO `application` (`id`, `fname`, `lname`, `age`, `bmonth`, `bday`, `byear`, `phonenum`, `email`, `street1`, `street2`, `city`, `province`, `postal`, `country`, `loanAmount`, `term`, `fundPurpose`, `applyDate`, `directorStatus`, `presidentStatus`, `applicationStatus`, `remark`, `collector`) VALUES
-(1, 'Michael', 'James', 22, 12, 13, 2001, 9267291085, 'jordan23@gmail.com', 'home blk.69', 'Grove St.', 'Los Santos', 'San Andreas', 42069, 'United States', 100000, '6 Months', 'Weed and coke', '2024-06-23 17:14:20', 'Approved', 'Approved', 'Pending', NULL, 'Pending'),
-(2, 'paulo', 'seres', 37, 1, 1, 1987, 9123456878, 'hawktuah@gmail.com', 'lower nasipit', 'Talamban', 'Cebu', 'Cebu', 6000, 'Philippines', 4206969, '24 Months', 'Health expense', '2024-06-23 19:01:15', 'Approved', 'Rejected', 'Pending', NULL, 'Pending'),
-(3, 'john', 'doe', 99, 1, 1, 1924, 924248343, 'johndoe1132@gmail.com', 'street 1', 'street 2', 'City', 'Province', 11111, 'Country', 100000, 'term', 'fund', '2024-07-05 21:58:34', 'Rejected', 'Approved', 'Pending', 'remark', 'Pending'),
-(19, 'test ', 'approve', 0, 0, 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 'test approve', '2024-07-09 00:04:31', 'Approved', 'Rejected', 'Pending', NULL, 'Pending'),
-(20, 'test', 'delete', 0, 0, 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 'test delete', '2024-07-09 12:32:21', 'Rejected', 'Rejected', 'Pending', NULL, 'Pending');
+CREATE TABLE `approved` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(100) NOT NULL,
+  `age` int(11) NOT NULL,
+  `bmonth` tinyint(2) NOT NULL,
+  `bday` tinyint(2) NOT NULL,
+  `byear` int(4) NOT NULL,
+  `phonenum` bigint(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `street1` varchar(100) NOT NULL,
+  `street2` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `province` varchar(100) NOT NULL,
+  `postal` int(8) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `loanAmount` int(7) NOT NULL,
+  `term` varchar(255) NOT NULL,
+  `fundPurpose` varchar(100) NOT NULL,
+  `applyDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `applicationNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `approved`
+--
+
+INSERT INTO `approved` (`id`, `fname`, `lname`, `age`, `bmonth`, `bday`, `byear`, `phonenum`, `email`, `street1`, `street2`, `city`, `province`, `postal`, `country`, `loanAmount`, `term`, `fundPurpose`, `applyDate`, `applicationNumber`) VALUES
+(4, 'Donald The', 'Duck', 26, 2, 2, 1998, 977743438, 'donald@disney.com', 'sjfkdsjfk', 'fjklsdfjkldsfj', 'jfkdadljfkl', 'jdfsakfjk', 6999, 'Finland', 449494994, '60 Months', 'Quacking business', '2024-07-11 14:17:13', 27);
 
 -- --------------------------------------------------------
 
@@ -243,6 +268,35 @@ CREATE TABLE `presidentdb` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rejected`
+--
+
+CREATE TABLE `rejected` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(100) NOT NULL,
+  `age` int(11) NOT NULL,
+  `bmonth` tinyint(2) NOT NULL,
+  `bday` tinyint(2) NOT NULL,
+  `byear` int(4) NOT NULL,
+  `phonenum` bigint(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `street1` varchar(100) NOT NULL,
+  `street2` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `province` varchar(100) NOT NULL,
+  `postal` int(8) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `loanAmount` int(7) NOT NULL,
+  `term` varchar(255) NOT NULL,
+  `fundPurpose` varchar(100) NOT NULL,
+  `applyDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `applicationNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rejecteds`
 --
 
@@ -339,6 +393,13 @@ ALTER TABLE `application`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `approved`
+--
+ALTER TABLE `approved`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `applicationNumber` (`applicationNumber`);
+
+--
 -- Indexes for table `approveds`
 --
 ALTER TABLE `approveds`
@@ -370,6 +431,13 @@ ALTER TABLE `directordb`
 -- Indexes for table `presidentdb`
 --
 ALTER TABLE `presidentdb`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `applicationNumber` (`applicationNumber`);
+
+--
+-- Indexes for table `rejected`
+--
+ALTER TABLE `rejected`
   ADD PRIMARY KEY (`id`),
   ADD KEY `applicationNumber` (`applicationNumber`);
 
@@ -407,37 +475,49 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `approved`
+--
+ALTER TABLE `approved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `approveds`
 --
 ALTER TABLE `approveds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=598;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=600;
 
 --
 -- AUTO_INCREMENT for table `approvedspr`
 --
 ALTER TABLE `approvedspr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `collectordb`
 --
 ALTER TABLE `collectordb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `directordb`
 --
 ALTER TABLE `directordb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=600;
 
 --
 -- AUTO_INCREMENT for table `presidentdb`
 --
 ALTER TABLE `presidentdb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `rejected`
+--
+ALTER TABLE `rejected`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rejecteds`
