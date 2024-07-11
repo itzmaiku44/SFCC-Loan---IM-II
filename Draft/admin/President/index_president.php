@@ -125,7 +125,7 @@
                     </thead>
                     <tbody>
                         <?php   
-                            
+                            if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc())  /* CHECK ALL data from table by row */
                             {
                                 echo "
@@ -148,6 +148,9 @@
                                 </tr>
                                 ";
                             }
+                        } else {
+                            echo "<tr><td colspan='9'>No applications found</td></tr>";
+                        }
                             
         
 
