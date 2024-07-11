@@ -27,7 +27,7 @@
     $row_total = $result_total->fetch_assoc();
     $total_pages = ceil($row_total['total'] / $rows_per_page);
 
-    $data->close();
+    
 
 
     
@@ -129,38 +129,88 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            /* $sql = "select * from application";     Select all data from table
-                            $result = $data->query($sql);           Check SQL Connection
-                            if(!$result)
-                            {
-                                die("Invalid Query: " . $data->error);
-                            } */
-                            while($row = $result->fetch_assoc())  /* CHECK ALL data from table by row */
-                            {
-                                echo "
-                                <tr>
-                                    <td>$row[id]</td>
-                                    <td>$row[email]</td>
-                                    <td>$row[phonenum]</td>
-                                    <td>$row[loanAmount]</td>
-                                    <td>$row[term]</td>
-                                    <td>$row[fundPurpose]</td>
-                                    <td>$row[applyDate]</td>
-                                    <td>$row[applicationStatus]</td>
-                                    <td>
-                                        <div class='d-grid gap-2 d-md-block'>
-                                            <a class='btn btn-success btn-sm m-1 fs-5 align-baseline viewBtn' data-bs-toggle='modal' data-bs-target='#viewData' data-id='" . $row['id'] . "'><i class='bi bi-eye'></i></a> 
-                                            <a class='btn btn-primary btn-sm m-1 fs-5 align-baseline transferBtn' data-id='" . $row['id'] . "' ><i class='bi bi-envelope-check'></i></a>
-                                             
-                                            <a class='btn btn-danger btn-sm m-1 fs-5 align-baseline deleteBtn' data-id='{$row['id']}' data-bs-toggle='modal' data-bs-target='#deleteCaution'><i class='bi bi-trash'></i></a>
-                                            
-                                        </div>
-                                    </td>
-                                </tr>
-                                ";
-                            }
-                        ?>
+                    <?php
+// Fetch data
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $directorStatus = $row['directorStatus'];
+        $presidentStatus = $row['presidentStatus'];
+        $collectorStatus = $row['collector'];
+
+        // Initialize the applicationStatus
+        $applicationStatus = $row['applicationStatus'];
+
+        if ($directorStatus == "Approved" && $presidentStatus == "Approved" && $collectorStatus == "Approved") {
+            // Update applicationStatus to 'Approved'
+            $applicationStatus = 'Approved';
+            $updateSql = "UPDATE application SET applicationStatus='Approved' WHERE id=?";
+            $stmt = $data->prepare($updateSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+        } elseif ($directorStatus == "Rejected" || $presidentStatus == "Rejected" || $collectorStatus == "Rejected") {
+            // Update applicationStatus to 'Rejected'
+            $applicationStatus = 'Rejected';
+            $updateSql = "UPDATE application SET applicationStatus='Rejected' WHERE id=?";
+            $stmt = $data->prepare($updateSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+        }
+
+        // Move the data to the appropriate table
+        if ($applicationStatus == "Approved") {
+            // Move to approved table
+            $moveSql = "INSERT INTO approved (fname, lname, age, bmonth, bday, byear, phonenum, email, street1, street2, city, province, postal, country, loanAmount, term, fundPurpose, applyDate, applicationNumber)
+                        SELECT fname, lname, age, bmonth, bday, byear, phonenum, email, street1, street2, city, province, postal, country, loanAmount, term, fundPurpose, applyDate, id 
+                        FROM application WHERE id = ?";
+            $stmt = $data->prepare($moveSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+            $deleteSql = "DELETE FROM application WHERE id = ?";
+            $stmt = $data->prepare($deleteSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+            echo "<script>window.location.reload();</script>";
+        } elseif ($applicationStatus == "Rejected") {
+            // Move to rejected table
+            $moveSql = "INSERT INTO rejected (fname, lname, age, bmonth, bday, byear, phonenum, email, street1, street2, city, province, postal, country, loanAmount, term, fundPurpose, applyDate, applicationNumber)
+                        SELECT fname, lname, age, bmonth, bday, byear, phonenum, email, street1, street2, city, province, postal, country, loanAmount, term, fundPurpose, applyDate, id
+                        FROM application WHERE id = ?";
+            $stmt = $data->prepare($moveSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+            $deleteSql = "DELETE FROM application WHERE id = ?";
+            $stmt = $data->prepare($deleteSql);
+            $stmt->bind_param("i", $row['id']);
+            $stmt->execute();
+            echo "<script>window.location.reload();</script>";
+        }
+
+        echo "
+        <tr>
+            <td>{$row['id']}</td>
+            <td>{$row['email']}</td>
+            <td>{$row['phonenum']}</td>
+            <td>{$row['loanAmount']}</td>
+            <td>{$row['term']}</td>
+            <td>{$row['fundPurpose']}</td>
+            <td>{$row['applyDate']}</td>
+            <td>{$applicationStatus}</td>
+            <td>
+                <div class='d-grid gap-2 d-md-block'>
+                    <a class='btn btn-success btn-sm m-1 fs-5 align-baseline viewBtn' data-bs-toggle='modal' data-bs-target='#viewData' data-id='{$row['id']}'><i class='bi bi-eye'></i></a> 
+                    <a class='btn btn-primary btn-sm m-1 fs-5 align-baseline transferBtn' data-id='{$row['id']}'><i class='bi bi-envelope-check'></i></a>
+                    <a class='btn btn-danger btn-sm m-1 fs-5 align-baseline deleteBtn' data-id='{$row['id']}' data-bs-toggle='modal' data-bs-target='#deleteCaution'><i class='bi bi-trash'></i></a>
+                </div>
+            </td>
+        </tr>
+        ";
+    }
+} else {
+    echo "<tr><td colspan='9'>No applications found</td></tr>";
+}
+?>
+        
                     </tbody>
                 </table>
                 <script src="transfer.js"></script>
@@ -239,19 +289,31 @@
                                     <img src="../../image/id-card-icon.png" alt="" width="330" height="250" class="showImg">
                                 </div>
 
-                                <div class="inputField" id="inputField" style="flex-basis: 55%;border-left: 5px groove rgb(2, 121, 2);padding-left: 20px;padding-right: 50px;">
-                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;margin-bottom: 20px;">
+                                <div class="inputField" id="inputField" style="flex-basis: 55%;border-left: 5px groove rgb(2, 121, 2);padding-left: 20px;padding-right: 10px;">
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
                                         <label for="name" style="font-size: 20px;font-weight: 500;">Name:  <span id="modalName" style="font-size: 25px; font-weight: bold;"> </span></label>
                                         <!-- <input type="text" name="" id="modalName" value=" " disabled style="width: 80%;"> -->
                                     </div>
-                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;margin-bottom: 20px;">
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
                                         <label for="age" style="font-size: 20px;font-weight: 500;">Age: <span id="modalAge" style="font-size: 25px; font-weight: bold;"> </span></label>
                                     </div>
-                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;margin-bottom: 20px;">
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
                                         <label for="age" style="font-size: 20px;font-weight: 500;">Birthdate: <span id="modalBirth" style="font-size: 25px; font-weight: bold;"> </span></label>
                                     </div>
-                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;margin-bottom: 20px;">
-                                        <label for="age" style="font-size: 20px;font-weight: 500;">Address: <span id="modalAddress" style="font-size: 25px; font-weight: bold;"> </span></label>
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
+                                        <label for="address" style="font-size: 20px;font-weight: 500;">Address: <span id="modalAddress" style="font-size: 25px; font-weight: bold;"> </span></label>
+                                    </div>
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;margin-top: 30px;">
+                                        <label for="status" style="font-size: 30px;font-weight: 500;font-weight: bold;">Application Status </label>
+                                    </div>
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
+                                        <label for="status" style="font-size: 20px;font-weight: 500;">Collector: <span id="modalStatusCr" style="font-size: 25px; font-weight: bold;"> </span></label>
+                                    </div>
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
+                                        <label for="status" style="font-size: 20px;font-weight: 500;">Director: <span id="modalStatusDr" style="font-size: 25px; font-weight: bold;"> </span></label>
+                                    </div>
+                                    <div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
+                                        <label for="status" style="font-size: 20px;font-weight: 500;">President: <span id="modalStatusPr" style="font-size: 25px; font-weight: bold;"> </span></label>
                                     </div>
                                 </div>
                             </form>

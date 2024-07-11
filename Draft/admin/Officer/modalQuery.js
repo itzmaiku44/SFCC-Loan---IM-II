@@ -30,6 +30,9 @@ $(document).ready(function () {
                 $('#modalAge').text(response.age);
                 $('#modalBirth').text(birthdate);
                 $('#modalAddress').text(fullAddress);
+                $('#modalStatusDr').text(response.directorStatus);
+                $('#modalStatusPr').text(response.presidentStatus);
+                $('#modalStatusCr').text(response.collector);
 
                 $('#viewData').modal('show');
             }
